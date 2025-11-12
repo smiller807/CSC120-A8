@@ -95,11 +95,17 @@ public class House extends Building {
     }
   }
 
+  /**
+   * shows the method options available for use
+   */
   public void showOptions(){
     super.showOptions();
     System.out.println(" + hasDiningRoom() \n + nResidence \n + moveIn(s) \n + moveOut(s) \n + isResident(s)");
   }
 
+  /**
+   * allows for the active floor to change according to if the house has an elevator or not
+   */
   public void goToFloor(int floorNum) {
     if (hasElevator == true) {
         super.goToFloor(floorNum);

@@ -113,11 +113,17 @@ private boolean hasElevator;
     System.out.println(collection);
   }
 
+  /**
+   * shows the method options available for use
+   */
   public void showOptions(){
     super.showOptions();
     System.out.println(" + addTitle(t) \n + removeTitle(t) \n + checkoutTitle(t) \n + returnBook(t) \n + containsTitle(t) \n + isAvailable(t) \n + printCollection()");
   }
 
+  /**
+   * allows for the user to navigate floors in the library depending on if there is an elevator
+   */
   public void goToFloor(int floorNum) {
     if (hasElevator == true) {
         super.goToFloor(floorNum);

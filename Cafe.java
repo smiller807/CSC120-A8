@@ -74,11 +74,18 @@ public class Cafe extends Building{
         System.out.println("Default amounts restocked");
     }
 
+    /**
+    * shows the method options available for use
+    */
     public void showOptions(){
         super.showOptions();
         System.out.println(" + sellCoffee(int n, int n, int n) \n + restock(int n, int n, int n, int n)");
     }
 
+    /**
+     * to change the active floor but also doesn't allow for the use to change active floor b/c cafes only have 1 floor
+     * so it doesn't allow for the user to exceed the total number of floors (1)
+     */
     public void goToFloor(int floorNum){
         super.goToFloor(floorNum);
     }
