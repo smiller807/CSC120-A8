@@ -12,6 +12,7 @@ public class Cafe extends Building{
      * @param name name of the building
      * @param address address of the building
      * @param nFloors number of floors
+     * @param hasElevator if the building has an elevator or not
      */
     public Cafe(String name, String address, int nFloors, boolean hasElevator) {
         super(name, address, nFloors);
@@ -65,17 +66,22 @@ public class Cafe extends Building{
     }
 
     public void goToFloor(int floorNum) {
-        if (hasElevator = true){
+        if (hasElevator == true) {
             super.goToFloor(floorNum);
-        } else if (hasElevator = false){
+        } else {
             if (this.activeFloor == -1) {
                 throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
             }
-            if (floorNum < 1 || floorNum > activeFloor + 1) {
-                throw new RuntimeException("Invalid floor number because " + this.name + " does not have an elevator. Valid range for this Building is 1-" + this.nFloors + "+ or -1.");
+            if (floorNum < 1 || floorNum > this.nFloors ) {
+                throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
             }
-            System.out.println("You are now on floor #" + floorNum + " of " + this.name);
-            this.activeFloor = floorNum;
+            //Math.abs checks floorNum regardless of if the user is going upstairs or downstairs
+            if (Math.abs(floorNum - this.activeFloor) > 1) { 
+                throw new RuntimeException("Invalid because the House does not have an Elevator and therefore cannot skip floors");
+            } else {
+                System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+                this.activeFloor = floorNum;
+            } 
         }
     }
 

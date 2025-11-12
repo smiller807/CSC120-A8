@@ -3,16 +3,19 @@ import java.util.Hashtable;
 public class Library extends Building{
 
 private Hashtable<String, Boolean> collection;
+private boolean hasElevator;
 
   /**
    * constructor
    * @param name name of the library
    * @param address adress of the library
    * @param nFloors number of floors in the library
+   * @param hasElevator if the building has an elevator or not
    */
-  public Library(String name, String address, int nFloors) {
+  public Library(String name, String address, int nFloors, boolean hasElevator) {
     super(name, address, nFloors);
     this.collection = new Hashtable<String, Boolean>();
+    this.hasElevator = hasElevator;
     System.out.println("You have built a library: 📖");
   }
 
@@ -104,9 +107,29 @@ private Hashtable<String, Boolean> collection;
     System.out.println(" + addTitle(t) \n + removeTitle(t) \n + checkoutTitle(t) \n + returnBook(t) \n + containsTitle(t) \n + isAvailable(t) \n + printCollection()");
   }
 
+  public void goToFloor(int floorNum) {
+    if (hasElevator == true) {
+        super.goToFloor(floorNum);
+    } else {
+      if (this.activeFloor == -1) {
+          throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
+      }
+      if (floorNum < 1 || floorNum > this.nFloors ) {
+          throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
+      }
+      //Math.abs checks floorNum regardless of if the user is going upstairs or downstairs
+      if (Math.abs(floorNum - this.activeFloor) > 1) {
+          throw new RuntimeException("Invalid because the House does not have an Elevator and therefore cannot skip floors");
+      } else {
+          System.out.println("You are now on floor #" + floorNum + " of " + this.name);
+          this.activeFloor = floorNum;
+      } 
+    }
+  }
+
   
   public static void main(String[] args) {
-    Library myLibrary = new Library("Neilson Library", "Seeyle Lawn", 4);
+    Library myLibrary = new Library("Neilson Library", "Seeyle Lawn", 4, true);
     myLibrary.showOptions();
   }
 }
