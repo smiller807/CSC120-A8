@@ -22,6 +22,17 @@ public class House extends Building {
     System.out.println("You have built a house: 🏠");
   }
 
+  //overloaded constructor only hardcoding nFloors
+  public House(String name, String address, boolean hasDiningRoom, boolean hasElevator){
+    this(name,address, 1, hasDiningRoom, hasElevator);
+    System.out.println("You have built a default house: 🏠");
+  }
+
+  //overloaded constructor using only name and address
+  public House(String name, String address){
+    this(name,address,1,false,false);
+  }
+
   /**
    * method if the hosue has a dining room
    * @return returns true/false if the house has/doesn't have a dining room

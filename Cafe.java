@@ -5,16 +5,14 @@ public class Cafe extends Building{
     private int nSugarPackets; // The number of sugar packets remaining in inventory
     private int nCreams; // The number of "splashes" of cream remaining in inventory
     private int nCups; // The number of cups remaining in inventory
-    private boolean hasElevator;
 
     /**
      * constructor
      * @param name name of the building
      * @param address address of the building
      * @param nFloors number of floors
-     * @param hasElevator if the building has an elevator or not
      */
-    public Cafe(String name, String address, int nFloors, boolean hasElevator) {
+    public Cafe(String name, String address, int nFloors) {
         super(name, address, nFloors);
         this.nCoffeeOunces = 30;
         this.nSugarPackets = 30;
@@ -22,6 +20,12 @@ public class Cafe extends Building{
         this.nCups = 30;
 
         System.out.println("You have built a cafe: ☕");
+    }
+
+    //overloaded constructor
+    public Cafe(String name, String address){
+        this(name, address, 1);
+        System.out.println("You have built a default cafe: ☕");
     }
 
     /**
@@ -60,33 +64,29 @@ public class Cafe extends Building{
         System.out.println("Cafe restocked!");
     } 
 
+    // overloaded method
+    private void restock(){
+        this.nCoffeeOunces += 10;
+        this.nSugarPackets += 10;
+        this.nCreams += 10;
+        this.nCreams += 10;
+        this.nCups += 10;
+        System.out.println("Default amounts restocked");
+    }
+
     public void showOptions(){
         super.showOptions();
         System.out.println(" + sellCoffee(int n, int n, int n) \n + restock(int n, int n, int n, int n)");
     }
 
-    public void goToFloor(int floorNum) {
-        if (hasElevator == true) {
-            super.goToFloor(floorNum);
-        } else {
-            if (this.activeFloor == -1) {
-                throw new RuntimeException("You are not inside this Building. Must call enter() before navigating between floors.");
-            }
-            if (floorNum < 1 || floorNum > this.nFloors ) {
-                throw new RuntimeException("Invalid floor number. Valid range for this Building is 1-" + this.nFloors + ".");
-            }
-            //Math.abs checks floorNum regardless of if the user is going upstairs or downstairs
-            if (Math.abs(floorNum - this.activeFloor) > 1) { 
-                throw new RuntimeException("Invalid because the House does not have an Elevator and therefore cannot skip floors");
-            } else {
-                System.out.println("You are now on floor #" + floorNum + " of " + this.name);
-                this.activeFloor = floorNum;
-            } 
-        }
+    public void goToFloor(int floorNum){
+        super.goToFloor(floorNum);
     }
 
     public static void main(String[] args) {
-        Cafe myCafe = new Cafe("Compass", "Neilson Library", 1, false);
+        Cafe myCafe = new Cafe("Compass", "Neilson Library", 1);
         myCafe.showOptions();
+        myCafe.enter();
+        myCafe.goToFloor(-1);
     }
 }

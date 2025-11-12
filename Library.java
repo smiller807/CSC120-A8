@@ -19,6 +19,17 @@ private boolean hasElevator;
     System.out.println("You have built a library: 📖");
   }
 
+  //overloaded constructor only hardcoding nFLoors
+  public Library(String name, String address, boolean hasElevator){
+    this(name, address, 1, hasElevator);
+    System.out.println("You have built a default library: 📖");
+  }
+
+  //overloaded constructor only using name and address
+  public Library(String name, String address){
+    this(name, address, 1, false);
+  }
+
   /**
    * method to add a title to the collection
    * @param title title of the book being added
